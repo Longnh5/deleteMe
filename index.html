@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Screen Demo</title>
+<style>
+    /* Some basic styles for demonstration */
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+</head>
+<body>
+
+<button id="fullscreen-btn">Toggle Full Screen</button>
+
+<script>
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+    fullscreenBtn.addEventListener('click', () => {
+        if (document.fullscreenElement) {
+            // If already in full screen, exit full screen
+            document.exitFullscreen();
+        } else {
+            // If not in full screen, request full screen
+            document.documentElement.requestFullscreen();
+        }
+    });
+</script>
+
+</body>
+</html>
