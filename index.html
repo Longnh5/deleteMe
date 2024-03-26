@@ -3,35 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Full Screen Demo</title>
+<title>Fullscreen Demo</title>
 <style>
-    /* Some basic styles for demonstration */
-    body, html {
-        height: 100%;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    /* Style for the button */
+    #fullscreen-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
 </style>
 </head>
 <body>
 
-<button id="fullscreen-btn">Toggle Full Screen</button>
-<p id="fullscreen-instruction" style="display:none;">To enter full-screen mode, tap the <strong>Share</strong> icon, then select <strong>Fullscreen</strong>.</p>
+<!-- Button to trigger full-screen mode -->
+<button id="fullscreen-button">Enter Fullscreen</button>
 
 <script>
-    const fullscreenBtn = document.getElementById('fullscreen-btn');
-    const fullscreenInstruction = document.getElementById('fullscreen-instruction');
-
-    fullscreenBtn.addEventListener('click', () => {
-        if (document.fullscreenElement) {
-            // If already in full screen, exit full screen
-            document.exitFullscreen();
+    // Function to toggle full-screen mode
+    function toggleFullScreen() {
+        if (!document.fullscreenElement && !document.mozFullScreenElement &&
+            !document.webkitFullscreenElement && !document.msFullscreenElement) {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) {
+                document.documentElement.msRequestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
         } else {
-            // If not in full screen, provide instruction for iOS users
-            fullscreenInstruction.style.display = 'block';
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
         }
+    }
+
+    // Add event listener to the button
+    document.getElementById('fullscreen-button').addEventListener('click', function() {
+        toggleFullScreen();
     });
 </script>
 
