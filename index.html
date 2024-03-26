@@ -18,17 +18,19 @@
 <body>
 
 <button id="fullscreen-btn">Toggle Full Screen</button>
+<p id="fullscreen-instruction" style="display:none;">To enter full-screen mode, tap the <strong>Share</strong> icon, then select <strong>Fullscreen</strong>.</p>
 
 <script>
     const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const fullscreenInstruction = document.getElementById('fullscreen-instruction');
 
     fullscreenBtn.addEventListener('click', () => {
         if (document.fullscreenElement) {
             // If already in full screen, exit full screen
             document.exitFullscreen();
         } else {
-            // If not in full screen, request full screen
-            document.documentElement.requestFullscreen();
+            // If not in full screen, provide instruction for iOS users
+            fullscreenInstruction.style.display = 'block';
         }
     });
 </script>
